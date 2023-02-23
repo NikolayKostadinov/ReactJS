@@ -1,0 +1,9 @@
+.book-item{
+    border-bottom: 1px solid white;
+    padding-bottom: 1rem;
+}
+
+.author{
+    display: block;
+    font-style: italic;
+}

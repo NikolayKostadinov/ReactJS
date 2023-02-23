@@ -15,13 +15,13 @@ export default function Counter(props) {
         setCount(() => 0);
     }
 
-    let title = '';
+    let title;
     if (count < 10) {
         title = 'Counter';
-    } else if (count < 30) {
-        title = 'Turbo counter';
-    } else {
+    } else if (count >= 30) {
         title = 'Mega counter';
+    } else {
+        title = 'Turbo counter';
     }
 
     return (

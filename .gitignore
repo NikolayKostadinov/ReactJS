@@ -1,0 +1,43 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!08-Single-Page-Applications-Exercise/src/03.Sample/**/build/
+*.zip
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!08-Single-Page-Applications-Exercise/src/03.Sample/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!08-Single-Page-Applications-Exercise/src/03.Sample/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode
+.nyc_output
+node_modules
+/test-results/
+/playwright-report/
+/playwright/.cache/
