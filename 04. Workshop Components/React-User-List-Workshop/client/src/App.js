@@ -1,6 +1,7 @@
 import './App.css';
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
+import Search from './components/search/Search';
 
 function App() {
     return (
@@ -8,7 +9,7 @@ function App() {
             <Header />
             <main className='main'>
                 <section className="card users-container">
-
+                    <Search />
                 </section>
             </main>
             <Footer />
