@@ -20,16 +20,18 @@ function App() {
     function changeHandler(e) {
         setFormState({
             ...formState,
-            [e.target.name]: e.target.value
+            [e.target.name]: (e.target.type === 'checkbox') ?
+                e.target.checked
+                : e.target.value
         });
     }
 
-    function changeCheckHandler(e) {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.checked
-        });
-    }
+    // function changeCheckHandler(e) {
+    //     setFormState({
+    //         ...formState,
+    //         [e.target.name]: e.target.checked
+    //     });
+    // }
 
 
     return (
@@ -123,7 +125,7 @@ function App() {
                             name="tac"
                             id="tac"
                             checked={formState.tac}
-                            onChange={changeCheckHandler} />
+                            onChange={changeHandler} />
                     </div>
 
                     <input type="submit" value="Login" />
