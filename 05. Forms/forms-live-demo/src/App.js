@@ -27,7 +27,7 @@ function App() {
     function changeCheckHandler(e) {
         setFormState({
             ...formState,
-            [e.target.name]: !formState[e.target.name]
+            [e.target.name]: e.target.checked
         });
     }
 
