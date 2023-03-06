@@ -23,9 +23,9 @@ const Home = () => {
         <h1>Latest Games</h1>
         {/* Display div: with information about every game (if any) */}
         {
-          games.length === 0
-            ? <p className="no-articles">No games yet</p>
-            : games.map(game => <LatestGame key={game._id} game={game} />)
+          games.length > 0
+            ? games.map(game => <LatestGame key={game._id} game={game} />)
+            : <p className="no-articles">No games yet</p>
         }
       </div>
     </section>

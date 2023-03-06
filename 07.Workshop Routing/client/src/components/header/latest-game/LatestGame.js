@@ -1,6 +1,7 @@
+import {Link} from 'react-router-dom';
 const LatestGame = (props) => {
     const { game } = props;
-    return ( 
+    return (
         <div className="game">
             <div className="image-wrap">
                 <img src={game.imageUrl} />
@@ -14,9 +15,7 @@ const LatestGame = (props) => {
                 <span>☆</span>
             </div>
             <div className="data-buttons">
-                <a href="#" className="btn details-btn">
-                    Details
-                </a>
+                <Link to={"/details"}>Details</Link>
             </div>
         </div>
     );
