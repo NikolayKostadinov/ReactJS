@@ -6,19 +6,33 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Login from './components/login/login';
 import Register from './components/register/Register';
+import { useState, useEffect } from 'react';
+import * as gameService from './services/gameService';
+import Details from './components/details/Details';
 
 function App() {
+  const [games, setGames] = useState([]);
+  useEffect(() => {
+    gameService.getAll()
+      .then(data => {
+        Object.values(data)
+          .forEach(game =>
+            setGames(games => [...games, game])
+          );
+      });
+  }, []);
   return (
     <div className="App">
       <div id="box">
         <Header />
         <main id="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home games = {games}/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/regirter" element={<Register />} />
             <Route path="/create" element={<CreateGame />} />
-            <Route path="/catalog" element={<Catalog />} />
+            <Route path="/catalog" element={<Catalog games={games}/>} />
+            <Route path="/catalog/:id" element={<Details/>} />
           </Routes>
         </main>
       </div>
