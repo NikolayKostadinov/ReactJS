@@ -1,10 +1,10 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const LatestGame = (props) => {
     const { game } = props;
     return (
         <div className="game">
             <div className="image-wrap">
-                <img src={game.imageUrl} />
+                <img src={game.imageUrl} alt={`${game.title}_pick`}/>
             </div>
             <h3>{game.title}</h3>
             <div className="rating">
@@ -15,7 +15,11 @@ const LatestGame = (props) => {
                 <span>☆</span>
             </div>
             <div className="data-buttons">
-                <Link to={"/details"}>Details</Link>
+                <Link
+                    to={`/catalog/${game._id}`}
+                    className="btn details-btn">
+                    Details
+                </Link>
             </div>
         </div>
     );

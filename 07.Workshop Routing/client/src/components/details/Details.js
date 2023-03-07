@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import * as gameService from '../../services/gameService';
+import Comment from "../comment/Comment";
+// import * as gameService from '../../services/gameService';
 
 const Details = ({
     games,
@@ -23,9 +24,7 @@ const Details = ({
         setComment(formState => ({
             ...formState,
             [ev.target.name]: ev.target.value,
-        })
-
-        )
+        }))
     }
 
     return (
@@ -44,27 +43,22 @@ const Details = ({
                 {/* Bonus ( for Guests and Users ) */}
                 <div className="details-comments">
                     <h2>Comments:</h2>
-                    <ul>
-                        {/* list all comments for current game (If any) */}
-                        <li className="comment">
-                            <p>Content: I rate this one quite highly.</p>
-                        </li>
-                        <li className="comment">
-                            <p>Content: The best game.</p>
-                        </li>
-                    </ul>
-                    {/* Display paragraph: If there are no games in the database */}
-                    <p className="no-comment">No comments.</p>
+                    {game.comments && game.comments.length > 0
+                        ? <ul>
+                            {game.comments.map((c, ix) => <Comment key={ix} comment={c} />)}
+                        </ul>
+
+                        : <p className="no-comment">No comments.</p>}
                 </div>
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
-                <div className="buttons">
+                {/* <div className="buttons">
                     <a href="#" className="button">
                         Edit
                     </a>
                     <a href="#" className="button">
                         Delete
                     </a>
-                </div>
+                </div> */}
             </div>
             {/* Bonus */}
             {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}

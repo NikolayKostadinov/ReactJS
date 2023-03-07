@@ -10,7 +10,6 @@ const Catalog = (props) => {
                     ? games.map(game => <CatalogItem key={game._id} game={game} />)
                     : <h3 className="no-articles">No articles yet</h3>
             }
-
         </section>
     );
 }
