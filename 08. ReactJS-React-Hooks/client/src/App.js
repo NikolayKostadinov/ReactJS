@@ -26,6 +26,11 @@ function App() {
   const taskCompletedHandler = async (task) => {
     await updateTask({ ...task, isCompleted: !task.isCompleted });
     setTasks(state => state.map(t => t._id !== task._id ? t : { ...t, isCompleted: !t.isCompleted }));
+  }  
+  
+  const taskUpdateHandler = async (task) => {
+    await updateTask({ ...task });
+    setTasks(state => state.map(t => t._id !== task._id ? t : task));
   }
 
   return (
@@ -34,7 +39,7 @@ function App() {
         <h1>TODO App</h1>
       </header>
       <main>
-        <TaskContext.Provider value={{ tasks, taskDeleteHandler, taskCreateHandler, taskCompletedHandler }}>
+        <TaskContext.Provider value={{ tasks, taskDeleteHandler, taskCreateHandler, taskCompletedHandler, taskUpdateHandler }}>
           {isLoading
             ? <p>Loading...</p>
             : <TaskList />
