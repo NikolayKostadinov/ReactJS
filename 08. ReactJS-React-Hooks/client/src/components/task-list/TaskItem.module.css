@@ -1,0 +1,41 @@
+.task-item{
+    cursor: pointer;
+    user-select: none;
+}
+.btn-clear{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 50%;
+    font-weight: 600;
+    line-height: 0.5rem;
+    color: white;
+    vertical-align: top;
+    background-color: red;
+    padding: 3px;
+    border-radius: 2px;
+    margin-left: 2px;
+}
+
+.btn-edit{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 50%;
+    font-weight: 600;
+    line-height: 0.5rem;
+    color: white;
+    vertical-align: top;
+    background-color: green;
+    padding: 3px;
+    border-radius: 2px;
+    margin-left: 2px;
+}
+
+.completed{
+    text-decoration: line-through;
+}
+
+.incompleted{
+    text-decoration: none;
+}
