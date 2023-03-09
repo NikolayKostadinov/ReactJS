@@ -1,19 +1,25 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { Link, useParams } from "react-router-dom";
 import Comment from "../comment/Comment";
-// import * as gameService from '../../services/gameService';
+import * as gameService from '../../services/gameService';
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Details = ({
-    games,
     addComment
 }) => {
+    const [game, setGame] = useState({});
     const { gameId } = useParams();
     const [comment, setComment] = useState({
         username: '',
         comment: ''
     });
 
-    const game = games.find(x => x._id === gameId);
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        gameService.getDetails(gameId)
+            .then(game => setGame(game))
+    }, [gameId])
 
     const addCommentHandler = (ev) => {
         ev.preventDefault();
@@ -51,14 +57,18 @@ const Details = ({
                         : <p className="no-comment">No comments.</p>}
                 </div>
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
-                {/* <div className="buttons">
-                    <a href="#" className="button">
-                        Edit
-                    </a>
-                    <a href="#" className="button">
-                        Delete
-                    </a>
-                </div> */}
+                {game._ownerId === user._id
+                    ?
+                    <div className="buttons">
+                        <Link to={`/edit/${game._id}`} className="button">
+                            Edit
+                        </Link>
+                        <Link to={`/delete/${game._id}`} className="button">
+                            Delete
+                        </Link>
+                    </div>
+                    : null
+                }
             </div>
             {/* Bonus */}
             {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}

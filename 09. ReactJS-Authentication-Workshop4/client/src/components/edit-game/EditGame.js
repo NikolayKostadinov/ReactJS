@@ -1,31 +1,34 @@
-import './CreateGame.modul.css';
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import * as gameServices from '../../services/gameService';
+import * as gameService from '../../services/gameService';
 import { GameContext } from '../../contexts/GameComtext';
 
-const CreateGame = () => {
-    const {addGame} = useContext(GameContext);
+import './EditGame.modul.css';
+
+const EditGame = () => {
+    const {gameId} = useParams();
+    const { updateGame } = useContext(GameContext);
     const [errors, setError] = useState({});
-    const [formState, setFormState] = useState({
-        title: '',
-        category: '',
-        maxLevel: '',
-        imageUrl: '',
-        summary: '',
-    });
+    const [formState, setFormState] = useState({});
     const navigator = useNavigate();
+
+
+    useEffect(() => {
+        gameService.getDetails(gameId)
+            .then(game => setFormState(game))
+    },[gameId])
+
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        if (Object.values(errors).every(v=>!v))
-            gameServices.createGame(formState)
-            .then(createdGame => {
-                addGame(createdGame)
-                navigator('/');
-            });
+        if (Object.values(errors).every(v => !v))
+            gameService.updateGame(formState)
+                .then(updatedGame => {
+                    updateGame(formState);
+                    navigator(`/catalog/${formState._id}`);
+                });
     }
 
     const onChange = (ev) => {
@@ -64,10 +67,10 @@ const CreateGame = () => {
     }
 
     return (
-        <section id="create-page" className="auth" >
-            <form id="create" onSubmit={onSubmit}>
+        <section id="edit-page" className="auth">
+            <form id="edit" onSubmit={onSubmit}>
                 <div className="container">
-                    <h1>Create Game</h1>
+                    <h1>Edit Game</h1>
                     <label htmlFor="leg-title">Legendary title:</label>
                     <input
                         type="text"
@@ -123,7 +126,7 @@ const CreateGame = () => {
                         defaultValue={formState.imageUrl}
                         onBlur={imgUrlValidator}
                     />
-                     {errors.imageUrl &&
+                    {errors.imageUrl &&
                         <p className="form-error">
                             Invsalid image url!
                         </p>
@@ -133,15 +136,10 @@ const CreateGame = () => {
                         id="summary"
                         onChange={onChange}
                         defaultValue={formState.summary} />
-                    <input
-                        className="btn submit"
-                        type="submit"
-                        defaultValue="Create Game"
-                        disabled={Object.values(errors).some(v => v)}
-                    />
+                    <input className="btn submit" type="submit" defaultValue="Edit Game" />
                 </div>
             </form>
         </section>
-    );
+    )
 }
-export default CreateGame;
+export default EditGame;

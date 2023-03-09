@@ -14,6 +14,8 @@ import './App.css';
 import Logout from './components/logout/Logout';
 import useSessionPersister from './hooks/useSessionPersister';
 import { GameContext } from './contexts/GameComtext';
+import EditGame from './components/edit-game/EditGame';
+import Delete from './components/delete/Delete';
 
 // Component lazy loading
 const Register = lazy(() => import('./components/register/Register'))
@@ -43,6 +45,14 @@ function App() {
         setGames(games => [...games, game]);
     }
 
+    const updateGame = (game) => {
+        setGames(games => games.map(g => g._id === game._id ? game : g));
+    }
+    
+    const deleteGame = (gameId) => {
+        setGames(games => games.filter(g=>g._id !== gameId));
+    }
+
     useEffect(() => {
         gameService.getAll()
             .then(data => {
@@ -55,7 +65,7 @@ function App() {
 
     return (
         <AuthContext.Provider value={{ user: auth, userLogin, userLogout }}>
-            <GameContext.Provider value={{ games, addGame }}>
+            <GameContext.Provider value={{ games, addGame, updateGame, deleteGame}}>
                 <div className="App">
                     <div id="box">
                         <Header />
@@ -67,9 +77,11 @@ function App() {
                                 <Route path="/register" element={<Suspense fallback={<span>Loading...</span>}>
                                     <Register />
                                 </Suspense>} />
-                                <Route path="/create" element={<CreateGame addGame={addGame} />} />
-                                <Route path="/catalog" element={<Catalog games={games} />} />
-                                <Route path="/catalog/:gameId" element={<Details games={games} addComment={addComment} />} />
+                                <Route path="/create" element={<CreateGame />} />
+                                <Route path="/edit/:gameId" element={<EditGame />} />
+                                <Route path="/delete/:gameId" element={<Delete />} />
+                                <Route path="/catalog" element={<Catalog />} />
+                                <Route path="/catalog/:gameId" element={<Details addComment={addComment} />} />
                             </Routes>
                         </main>
                     </div>
