@@ -30,7 +30,7 @@ const Details = () => {
         ev.preventDefault();
         commentService.createComment(game._id, comment)
             .then(result => {
-                addComment(game._id, result);
+                addComment(game._id, {...result, user: user});
                 setComment('')
             });
     }
