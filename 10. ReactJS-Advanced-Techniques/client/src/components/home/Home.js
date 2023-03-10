@@ -1,7 +1,8 @@
 
-import LatestGame from '../header/latest-game/LatestGame';
+import { useGameContext } from '../../contexts/GameContext';
+import LatestGame from './latest-game/LatestGame';
 const Home = (props) => {
-  const{games} = props
+  const{games} = useGameContext();
   return (
     <section id="welcome-world">
       <div className="welcome-message">
