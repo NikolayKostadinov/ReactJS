@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
-import RandomJoke from './components/RandomJoke';
-import ErrorBoundary from './components/common/ErrorBoundary';
+import RandomJoke from './components/joke-article/RandomJoke';
+import ErrorBoundary from './components/commona/ErrorBoundary';
 
 function App() {
   return (

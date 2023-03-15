@@ -11,7 +11,7 @@ const JokeArticle = ({
                 <img src={iconUrl} alt="Chuck Norris Joke" />
             </header>
             <main>
-                <p>{text}</p>
+                <p className="joke-test">{text}</p>
             </main>
         </article>)
 }
