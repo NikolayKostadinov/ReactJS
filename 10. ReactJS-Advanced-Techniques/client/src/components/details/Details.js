@@ -15,7 +15,8 @@ const Details = () => {
     const { addComment, fetchGameDetails, selectGame } = useGameContext();
     const game = selectGame(gameId);
     const { user } = useAuthContext();
-
+    const isOwner = game._ownerId === user._id;
+    
     useEffect(() => {
         gameService.getDetails(gameId)
             .then(game => {
@@ -63,7 +64,7 @@ const Details = () => {
                         : <p className="no-comment">No comments.</p>}
                 </div>
                 {/* Edit/Delete buttons ( Only for creator of this game )  */}
-                {game._ownerId === user._id
+                {isOwner
                     ?
                     <div className="buttons">
                         <Link to={`/edit/${game._id}`} className="button">
