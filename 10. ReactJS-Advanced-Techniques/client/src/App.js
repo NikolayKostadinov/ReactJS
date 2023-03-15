@@ -33,7 +33,6 @@ function App() {
                             <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/login" element={<Login />} />
-                                <Route path="/logout" element={<Logout />} />
                                 <Route path="/register" element={<Suspense fallback={<span>Loading...</span>}>
                                     <Register />
                                 </Suspense>} />

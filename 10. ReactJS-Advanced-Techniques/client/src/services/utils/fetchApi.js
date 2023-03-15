@@ -1,4 +1,4 @@
-import { getUserData } from "./users_store.js";
+import { getUserData, clearUserData } from "./users_store.js";
 
 const host = 'http://localhost:3030';
 
@@ -26,6 +26,7 @@ async function request(method, url, data) {
         }
 
         if (response.status === 403) {
+            clearUserData();
             window.location = '/';
         }
 
