@@ -4,7 +4,13 @@ import { action } from "../hooks/useGames";
 
 
 export const GameContext = createContext({
-    games: [], addGame: {}, updateGame: {}, deleteGame: {}, addComment: {}, fetchGameDetails:{}, selectGame:{}
+    games: [],
+    addGame: {},
+    updateGame: {},
+    deleteGame: {},
+    addComment: {},
+    fetchGameDetails: {},
+    selectGame: {}
 });
 
 export const useGameContext = () => {
@@ -25,7 +31,7 @@ export const GameProvider = ({
     }
 
     const addGame = (game) => {
-       dispatcher({
+        dispatcher({
             type: action.GAME_ADD,
             payload: game
         });
@@ -52,10 +58,20 @@ export const GameProvider = ({
         });
     }
 
-    const selectGame = (gameId) => games.find(g=>g._id ===gameId);
+    const selectGame = (gameId) => games.find(g => g._id === gameId);
 
     return (
-        <GameContext.Provider value={{ games, addGame, updateGame, deleteGame, addComment, fetchGameDetails, selectGame }}>
+        <GameContext.Provider
+            value={{
+                games,
+                addGame,
+                updateGame,
+                deleteGame,
+                addComment,
+                fetchGameDetails,
+                selectGame
+            }}
+        >
             {children}
         </GameContext.Provider>
     );

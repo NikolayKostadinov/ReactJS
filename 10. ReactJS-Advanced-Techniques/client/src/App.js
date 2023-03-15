@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
 import { AuthProvider } from './contexts/AuthContext';
-import { GameProvider} from './contexts/GameContext';
+import { GameProvider } from './contexts/GameContext';
 
 
 import Catalog from './components/catalog/Catalog';
@@ -15,6 +15,8 @@ import './App.css';
 import Logout from './components/logout/Logout';
 import EditGame from './components/edit-game/EditGame';
 import Delete from './components/delete/Delete';
+import PrivateRoute from './components/common/PrivateRoute';
+import RouteConstraint from './components/common/RouteConstraint';
 
 // Component lazy loading
 const Register = lazy(() => import('./components/register/Register'))
@@ -35,11 +37,22 @@ function App() {
                                 <Route path="/register" element={<Suspense fallback={<span>Loading...</span>}>
                                     <Register />
                                 </Suspense>} />
-                                <Route path="/create" element={<CreateGame />} />
-                                <Route path="/edit/:gameId" element={<EditGame />} />
+
+                                {/* Route guard - Fist implementation */}
+                                <Route path="/create" element={
+                                    <PrivateRoute>
+                                        <CreateGame />
+                                    </PrivateRoute>
+                                } />
+
+                                {/* Route guard - Second implementation */}
+                                <Route element={<RouteConstraint />}>
+                                    <Route path="/edit/:gameId" element={<EditGame />} />
+                                    <Route path="/delete/:gameId" element={<Delete />} />
+                                </Route>
                                 <Route path="/delete/:gameId" element={<Delete />} />
                                 <Route path="/catalog" element={<Catalog />} />
-                                <Route path="/catalog/:gameId" element={<Details/>} />
+                                <Route path="/catalog/:gameId" element={<Details />} />
                             </Routes>
                         </main>
                     </div>
