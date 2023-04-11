@@ -1,0 +1,9 @@
+.over{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10rem;
+    right: 4rem;
+    z-index: 10000;
+    transition: all ease-in-out 500ms ;
+}

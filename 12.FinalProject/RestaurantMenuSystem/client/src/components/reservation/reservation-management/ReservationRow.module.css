@@ -1,0 +1,10 @@
+.confirmed{
+    background-color:  #a5eded !important;
+}
+.confirmed:nth-of-type(odd){
+    background-color: #bfedde !important;
+}
+
+.finished{
+    text-decoration: line-through;
+}
